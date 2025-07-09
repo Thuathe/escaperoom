@@ -47,7 +47,7 @@ const HomePage = () => {
           src="/img/bg_home.jpg"
           alt="background"
           className={`object-cover w-full h-full ${
-            bgDimmed ? "opacity-60" : "opacity-100"
+            bgDimmed ? "opacity-30" : "opacity-100"
           } transition-opacity duration-[2500ms] ease-in-out`}
         />
       </div>
