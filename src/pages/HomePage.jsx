@@ -37,7 +37,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#0d0f1a] overflow-hidden px-4">
+    <div className="relative h-[100svh] flex flex-col bg-[#0d0f1a] overflow-hidden px-4">
+
       {/* 🌌 Background utama dengan transition halus */}
       <div
         className={`absolute inset-0 z-0 transition-all  ease-[cubic-bezier(0.4,0,0.2,1)]`}
