@@ -56,9 +56,9 @@ const MissionPage = () => {
 
       {/* Konten */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
-        <div className="backdrop-blur-lg bg-white/5 border border-yellow-900 rounded-xl p-8 w-full max-w-2xl shadow-xl text-white">
-          <h2 className="text-2xl font-bold text-amber-400 mb-2">{mission.title}</h2>
-          <p className="mb-4 text-yellow-200 text-sm">
+        <div className="w-full max-w-2xl p-8 text-white border border-yellow-900 shadow-xl backdrop-blur-lg bg-white/5 rounded-xl">
+          <h2 className="mb-2 text-2xl font-bold text-amber-400">{mission.title}</h2>
+          <p className="mb-4 text-sm text-yellow-200">
             Pertanyaan {currentQuestionIndex + 1} dari {mission.questions.length}
           </p>
           <p className="mb-6 text-yellow-100">{currentQuestion.question}</p>
@@ -99,7 +99,7 @@ const MissionPage = () => {
           {!isAnswered && (
             <button
               onClick={handleSubmit}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold px-4 py-2 rounded shadow-md transition"
+              className="w-full px-4 py-2 font-bold text-black transition rounded shadow-md bg-amber-500 hover:bg-amber-600"
             >
               ✅ Kunci Jawaban
             </button>

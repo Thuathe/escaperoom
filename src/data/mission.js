@@ -2,6 +2,7 @@ export const missions = [
   {
     id: 1,
     title: "Misi 1: Fungsi Dasar",
+    info: "Latihan dasar untuk mengenali fungsi-fungsi paling umum dalam perhitungan Excel.",
     puzzle: {
       type: "riddle",
       clue: "Bentukku besar, tak punya resleting, sering ada di sawah dan pasar.",
@@ -23,6 +24,7 @@ export const missions = [
   {
     id: 2,
     title: "Misi 2: Statistik",
+    info: "Pahami cara menganalisis data menggunakan COUNT, MAX, dan fungsi statistik lainnya.",
     puzzle: {
       type: "riddle",
       clue: "Aku bisa menghitung banyaknya data, bukan SUM, bukan MIN. Siapakah aku?",
@@ -44,6 +46,7 @@ export const missions = [
   {
     id: 3,
     title: "Misi 3: Finansial",
+    info: "Gunakan fungsi keuangan seperti PMT dan FV untuk mengendalikan masa depan keuanganmu.",
     puzzle: {
       type: "riddle",
       clue: "Digunakan untuk mengetahui cicilan per bulan. Apakah aku?",
@@ -65,6 +68,7 @@ export const missions = [
   {
     id: 4,
     title: "Misi 4: Lookup",
+    info: "Tantangan untuk menemukan informasi tersembunyi menggunakan lookup dan reference.",
     puzzle: {
       type: "riddle",
       clue: "Aku bisa menemukan nama hanya dengan kode. Siapakah aku?",
@@ -86,6 +90,7 @@ export const missions = [
   {
     id: 5,
     title: "Misi 5: Logika",
+    info: "Uji kemampuan berpikirmu dengan logika AND, OR, dan NOT. Jangan tertipu ilusi!",
     puzzle: {
       type: "riddle",
       clue: "Aku bekerja saat dua syarat benar. Tapi aku bukan OR. Siapakah aku?",
