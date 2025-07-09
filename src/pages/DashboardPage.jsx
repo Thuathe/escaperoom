@@ -22,7 +22,7 @@ useEffect(() => {
   const radius = 180;
 
   return (
-    <div className="relative min-h-screen bg-[#0d0f1a] overflow-hidden flex items-center justify-center">
+    <div className="relative h-[100svh] bg-[#0d0f1a] overflow-hidden flex items-center justify-center">
       {/* 🌌 Background */}
       <div className="absolute inset-0 z-0">
         <img
