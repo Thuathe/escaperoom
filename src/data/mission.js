@@ -10,18 +10,18 @@ export const missions = [
       image: "room-1.jpg",
       hotspots: {
         desktop: [
-          { x: 65, y: 270, isCorrect: true },
-          { x: 169, y: 55, isCorrect: false },
-          { x: 575, y: 380, isCorrect: false },
-          { x: 460, y: 330, isCorrect: false },
-          { x: 760, y: 340, isCorrect: false }
+          { x: 0.112, y: 0.65, isCorrect: true },
+          { x: 0.228, y: 0.14, isCorrect: false },
+          { x: 0.683, y: 0.92, isCorrect: false },
+          { x: 0.55, y: 0.8, isCorrect: false },
+          { x: 0.89, y: 0.78, isCorrect: false }
         ],
         mobile: [
-          { x: 30, y: 170, isCorrect: true },
-          { x: 110, y: 40, isCorrect: false },
-          { x: 270, y: 230, isCorrect: false },
-          { x: 210, y: 180, isCorrect: false },
-          { x: 330, y: 190, isCorrect: false }
+          { x: 0.115, y: 0.625, isCorrect: true },
+          { x: 0.229, y: 0.198, isCorrect: false },
+          { x: 0.55, y: 0.75, isCorrect: false },
+          { x: 0.68, y: 0.85, isCorrect: false },
+          { x: 0.89, y: 0.74, isCorrect: false }
         ]
       }
     },
@@ -166,18 +166,18 @@ export const missions = [
       image: "room-5.jpg",
       hotspots: {
         desktop: [
-          { x: 200, y: 250, isCorrect: true },
-          { x: 70, y: 100, isCorrect: false },
-          { x: 330, y: 110, isCorrect: false },
-          { x: 90, y: 310, isCorrect: false },
-          { x: 350, y: 270, isCorrect: false }
+          { x: 0.081, y: 0.562, isCorrect: true },
+          { x: 0.211, y: 0.114, isCorrect: false },
+          { x: 0.718, y: 0.791, isCorrect: false },
+          { x: 0.575, y: 0.687, isCorrect: false },
+          { x: 0.950, y: 0.708, isCorrect: false }
         ],
         mobile: [
-          { x: 100, y: 160, isCorrect: true },
-          { x: 40, y: 60, isCorrect: false },
-          { x: 180, y: 70, isCorrect: false },
-          { x: 50, y: 200, isCorrect: false },
-          { x: 190, y: 170, isCorrect: false }
+          { x: 0.083, y: 0.841, isCorrect: true },
+          { x: 0.305, y: 0.198, isCorrect: false },
+          { x: 0.750, y: 1.134, isCorrect: false },
+          { x: 0.583, y: 0.891, isCorrect: false },
+          { x: 0.916, y: 0.940, isCorrect: false }
         ]
       }
     },

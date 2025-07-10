@@ -38,8 +38,8 @@ const PuzzlePage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-black font-[Cinzel] overflow-hidden">
-      {/* 🌌 Background */}
+    <div className="relative h-[100svh] flex flex-col items-center justify-center bg-black font-[Cinzel] overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
           src="/img/bg_puzzle.jpg"
@@ -49,11 +49,9 @@ const PuzzlePage = () => {
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/80 to-black" />
 
-      {/* 🔳 Puzzle Area */}
+      {/* Puzzle Area */}
       <motion.div
-        className={`relative z-10 w-full max-w-5xl ${
-          isMobile ? "aspect-video" : "h-[480px]"
-        } rounded-xl overflow-hidden border border-yellow-900 shadow-[0_0_60px_rgba(255,255,255,0.05)]`}
+        className="relative z-10 w-full max-w-5xl px-4 md:px-0 aspect-video md:h-[480px] rounded-xl overflow-hidden border border-yellow-900 shadow-[0_0_60px_rgba(255,255,255,0.05)]"
         style={{
           backgroundImage: `url(/img/${mission.puzzle.image})`,
           backgroundSize: "cover",
@@ -64,25 +62,28 @@ const PuzzlePage = () => {
         transition={{ duration: 0.7 }}
       >
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60" />
+
+        {/* Render hotspot berdasarkan % posisi */}
         {hotspots.map((spot, i) => (
           <div
             key={i}
             onClick={() => handleClick(spot.isCorrect)}
-            className="absolute w-[40px] h-[40px] md:w-[70px] md:h-[70px]  rounded-full cursor-pointer transition-all duration-200 hover:ring-2 hover:ring-amber-400"
+            className="absolute w-[40px] h-[40px] md:w-[80px] md:h-[80px] rounded-full cursor-pointer "
             style={{
-              left: `${spot.x}px`,
-              top: `${spot.y}px`,
+              left: `${spot.x * 100}%`,
+              top: `${spot.y * 100}%`,
+              transform: "translate(-50%, -50%)",
               backgroundColor: spot.isCorrect
-                ? "rgba(255,255,255,1.04)"
-                : "rgba(255,0,0,1.05)",
-              backdropFilter: "blur(2px)",
+                ? "rgba(0,255,0,1.4)" // hijau semi transparan
+                : "rgba(255,0,0,1.4)", // merah semi transparan
+        
             }}
             title={spot.isCorrect ? "Lokasi Benar" : "Lokasi Salah"}
           />
         ))}
       </motion.div>
 
-      {/* 🧩 Clue */}
+      {/* Clue */}
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -92,7 +93,7 @@ const PuzzlePage = () => {
         “{mission.puzzle.clue}”
       </motion.h2>
 
-      {/* ❌ Feedback */}
+      {/* Feedback salah */}
       {message && (
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -103,7 +104,7 @@ const PuzzlePage = () => {
         </motion.p>
       )}
 
-      {/* ✅ Popup Benar */}
+      {/* Popup sukses */}
       <AnimatePresence>
         {showSuccess && (
           <motion.div
@@ -121,7 +122,8 @@ const PuzzlePage = () => {
                 ✅ Kode Lokasi Terbuka
               </h3>
               <p className="mb-5 text-sm">
-                Kamu telah menemukan titik yang benar. Pintu selanjutnya akan terbuka.
+                Kamu telah menemukan titik yang benar. Pintu selanjutnya akan
+                terbuka.
               </p>
               <button
                 onClick={handleContinue}
@@ -138,3 +140,21 @@ const PuzzlePage = () => {
 };
 
 export default PuzzlePage;
+
+// <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60" />
+// {hotspots.map((spot, i) => (
+//   <div
+//     key={i}
+//     onClick={() => handleClick(spot.isCorrect)}
+//     className="absolute w-[40px] h-[40px] md:w-[70px] md:h-[70px]  rounded-full cursor-pointer transition-all duration-200 hover:ring-2 hover:ring-amber-400"
+//     style={{
+//       left: `${spot.x}px`,
+//       top: `${spot.y}px`,
+//       backgroundColor: spot.isCorrect
+//         ? "rgba(255,255,255,1.04)"
+//         : "rgba(255,0,0,1.05)",
+//       backdropFilter: "blur(2px)",
+//     }}
+//     title={spot.isCorrect ? "Lokasi Benar" : "Lokasi Salah"}
+//   />
+// ))}
