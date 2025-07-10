@@ -3,6 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
 extend: {
+   fontFamily: {
+      cinzel: ['Cinzel', 'serif'],},
   animation: {
     float: "float 8s ease-in-out infinite",
     blink: "blink 3s ease-in-out infinite",

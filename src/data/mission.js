@@ -5,8 +5,25 @@ export const missions = [
     info: "Latihan dasar untuk mengenali fungsi-fungsi paling umum dalam perhitungan Excel.",
     puzzle: {
       type: "riddle",
-      clue: "Bentukku besar, tak punya resleting, sering ada di sawah dan pasar.",
+      clue: "Bentuk ku besar dan tidak mempunyai resleting, Aku sering terlihat di sawah dan di pasar, Menampung banyak tapi bukan koper. Siapakah Aku?",
       answer: "karung",
+      image: "room-1.jpg",
+      hotspots: {
+        desktop: [
+          { x: 65, y: 270, isCorrect: true },
+          { x: 169, y: 55, isCorrect: false },
+          { x: 575, y: 380, isCorrect: false },
+          { x: 460, y: 330, isCorrect: false },
+          { x: 760, y: 340, isCorrect: false }
+        ],
+        mobile: [
+          { x: 30, y: 170, isCorrect: true },
+          { x: 110, y: 40, isCorrect: false },
+          { x: 270, y: 230, isCorrect: false },
+          { x: 210, y: 180, isCorrect: false },
+          { x: 330, y: 190, isCorrect: false }
+        ]
+      }
     },
     questions: [
       {
@@ -28,7 +45,24 @@ export const missions = [
     puzzle: {
       type: "riddle",
       clue: "Aku bisa menghitung banyaknya data, bukan SUM, bukan MIN. Siapakah aku?",
-      answer: "count"
+      answer: "count",
+      image: "room-2.jpg",
+      hotspots: {
+        desktop: [
+          { x: 100, y: 250, isCorrect: true },
+          { x: 70, y: 100, isCorrect: false },
+          { x: 320, y: 90, isCorrect: false },
+          { x: 300, y: 300, isCorrect: false },
+          { x: 140, y: 340, isCorrect: false }
+        ],
+        mobile: [
+          { x: 50, y: 160, isCorrect: true },
+          { x: 40, y: 60, isCorrect: false },
+          { x: 180, y: 50, isCorrect: false },
+          { x: 160, y: 180, isCorrect: false },
+          { x: 90, y: 200, isCorrect: false }
+        ]
+      }
     },
     questions: [
       {
@@ -50,7 +84,24 @@ export const missions = [
     puzzle: {
       type: "riddle",
       clue: "Digunakan untuk mengetahui cicilan per bulan. Apakah aku?",
-      answer: "pmt"
+      answer: "pmt",
+      image: "room-3.jpg",
+      hotspots: {
+        desktop: [
+          { x: 140, y: 200, isCorrect: true },
+          { x: 60, y: 80, isCorrect: false },
+          { x: 320, y: 120, isCorrect: false },
+          { x: 100, y: 320, isCorrect: false },
+          { x: 370, y: 280, isCorrect: false }
+        ],
+        mobile: [
+          { x: 70, y: 130, isCorrect: true },
+          { x: 30, y: 40, isCorrect: false },
+          { x: 170, y: 70, isCorrect: false },
+          { x: 60, y: 200, isCorrect: false },
+          { x: 190, y: 180, isCorrect: false }
+        ]
+      }
     },
     questions: [
       {
@@ -72,7 +123,24 @@ export const missions = [
     puzzle: {
       type: "riddle",
       clue: "Aku bisa menemukan nama hanya dengan kode. Siapakah aku?",
-      answer: "vlookup"
+      answer: "vlookup",
+      image: "room-4.jpg",
+      hotspots: {
+        desktop: [
+          { x: 180, y: 220, isCorrect: true },
+          { x: 40, y: 70, isCorrect: false },
+          { x: 290, y: 130, isCorrect: false },
+          { x: 280, y: 310, isCorrect: false },
+          { x: 130, y: 360, isCorrect: false }
+        ],
+        mobile: [
+          { x: 80, y: 150, isCorrect: true },
+          { x: 20, y: 40, isCorrect: false },
+          { x: 160, y: 80, isCorrect: false },
+          { x: 150, y: 200, isCorrect: false },
+          { x: 70, y: 240, isCorrect: false }
+        ]
+      }
     },
     questions: [
       {
@@ -94,7 +162,24 @@ export const missions = [
     puzzle: {
       type: "riddle",
       clue: "Aku bekerja saat dua syarat benar. Tapi aku bukan OR. Siapakah aku?",
-      answer: "and"
+      answer: "and",
+      image: "room-5.jpg",
+      hotspots: {
+        desktop: [
+          { x: 200, y: 250, isCorrect: true },
+          { x: 70, y: 100, isCorrect: false },
+          { x: 330, y: 110, isCorrect: false },
+          { x: 90, y: 310, isCorrect: false },
+          { x: 350, y: 270, isCorrect: false }
+        ],
+        mobile: [
+          { x: 100, y: 160, isCorrect: true },
+          { x: 40, y: 60, isCorrect: false },
+          { x: 180, y: 70, isCorrect: false },
+          { x: 50, y: 200, isCorrect: false },
+          { x: 190, y: 170, isCorrect: false }
+        ]
+      }
     },
     questions: [
       {
