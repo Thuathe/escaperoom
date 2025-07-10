@@ -64,7 +64,7 @@ const SinopsisPage = () => {
           left: isMobile ? "0%" : "0%",
           bottom: isMobile ? "0%" : "0%",
           transform: "translateX(-50%)",
-          width: isMobile ? "150vw" : "30vw",
+          width: isMobile ? "150vw" : "25vw",
           filter: "drop-shadow(0 0 50px rgba(247,165,77,0.3))",
         }}
       />

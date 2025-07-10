@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { missions } from "../data/mission";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const MissionPage = () => {
   const { missionId } = useParams();
@@ -32,46 +33,70 @@ const MissionPage = () => {
       setSelected("");
 
       if (currentQuestionIndex + 1 < mission.questions.length) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setCurrentQuestionIndex((prev) => prev + 1);
       } else {
         navigate(`/result?mission=${mission.id}`);
       }
-    }, 2000);
+    }, 1800);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0d0f1a] overflow-hidden">
-      {/* Background */}
+    <div className="relative h-[100svh] bg-[#0d0f1a] text-[#f5e6c6] font-[Cinzel] overflow-hidden">
+      {/* 🌌 Background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/img/bg.jpg"
-          alt="castle"
-          className="object-cover w-full h-full opacity-30"
+          src="/img/bg_mission.jpg"
+          alt="mission-bg"
+          className="object-cover w-full h-full opacity-20"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#ffb84d22] to-[#0d0f1a]" />
+        <div className="absolute inset-0 bg-[url('/img/fog.png')] bg-cover opacity-10" />
       </div>
 
-      {/* Kabut + cahaya */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[#ffb84d22] to-[#0d0f1a] z-0" />
-      <div className="absolute inset-0 bg-[url('/img/fog.png')] bg-cover opacity-10 z-0" />
+      {/* 🧠 Konten */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-md px-5 py-6 md:px-8 md:py-8 bg-white/5 backdrop-blur-sm border border-yellow-800 rounded-xl shadow-[0_0_40px_rgba(247,165,77,0.1)]"
+        >
 
-      {/* Konten */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
-        <div className="w-full max-w-2xl p-8 text-white border border-yellow-900 shadow-xl backdrop-blur-lg bg-white/5 rounded-xl">
-          <h2 className="mb-2 text-2xl font-bold text-amber-400">{mission.title}</h2>
-          <p className="mb-4 text-sm text-yellow-200">
+          
+          {/* Indeks & Judul Misi */}
+          <h2
+            className="mb-2 text-3xl font-semibold text-center text-amber-300"
+            style={{
+              color: "rgba(245,226,198,1)",
+              textShadow:
+                "0 0 20px rgba(247,165,77,0.6), 0 0 20px rgba(247,165,77,0.5), 0 0 40px rgba(247,165,77,0.4)",
+                
+            }}
+          >
+            {mission.title}
+          </h2>
+          <p className="mb-6 text-xs italic font-light text-center text-yellow-200">
             Pertanyaan {currentQuestionIndex + 1} dari {mission.questions.length}
           </p>
-          <p className="mb-6 text-yellow-100">{currentQuestion.question}</p>
 
-          <div className="grid gap-4 mb-6">
+          {/* 🧠 Pertanyaan */}
+          <p className="mb-5 text-[15px] md:text-base leading-relaxed text-center text-yellow-100">
+            {currentQuestion.question}
+          </p>
+
+          {/* 📋 Pilihan */}
+          <div className="mb-5 space-y-3 text-sm italic font-light">
             {currentQuestion.options.map((opt) => (
-              <label
+              <motion.label
                 key={opt}
-                className={`block px-4 py-2 border rounded cursor-pointer transition-all duration-200 ${
-                  selected === opt
-                    ? "bg-amber-100 text-black border-amber-400"
-                    : "bg-black/30 text-yellow-200 border-yellow-800 hover:bg-black/40"
-                }`}
+                whileHover={{ scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                className={`block py-2.5 px-4 rounded-lg border text-center cursor-pointer transition-all tracking-wide font-medium select-none
+                  ${
+                    selected === opt
+                      ? "bg-[#f5e6c6] text-black border-amber-400"
+                      : "bg-black/20 border-yellow-800 text-yellow-100 hover:bg-black/30"
+                  }`}
               >
                 <input
                   type="radio"
@@ -79,32 +104,42 @@ const MissionPage = () => {
                   value={opt}
                   checked={selected === opt}
                   onChange={() => setSelected(opt)}
-                  className="mr-2"
+                  className="hidden"
                 />
                 {opt}
-              </label>
+              </motion.label>
             ))}
           </div>
 
-          {isAnswered && (
-            <div
-              className={`text-center mb-4 font-semibold ${
-                isCorrect ? "text-green-400" : "text-red-400"
-              }`}
-            >
-              {isCorrect ? "Jawaban Benar!" : "Jawaban Salah!"}
-            </div>
-          )}
+          {/* Feedback */}
+          <AnimatePresence>
+            {isAnswered && (
+              <motion.p
+                key="feedback"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className={`text-center font-semibold text-sm mb-4 ${
+                  isCorrect ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {isCorrect ? "✅ Jawaban Benar!" : "❌ Jawaban Salah!"}
+              </motion.p>
+            )}
+          </AnimatePresence>
 
+          {/* Tombol Submit */}
           {!isAnswered && (
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.02 }}
               onClick={handleSubmit}
-              className="w-full px-4 py-2 font-bold text-black transition rounded shadow-md bg-amber-500 hover:bg-amber-600"
+              className="w-full py-2.5 mt-2 text-sm font-semibold text-black rounded-md bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 hover:shadow-lg transition-all"
             >
               ✅ Kunci Jawaban
-            </button>
+            </motion.button>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
