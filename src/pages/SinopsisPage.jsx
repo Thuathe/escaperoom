@@ -64,14 +64,13 @@ const SinopsisPage = () => {
           left: isMobile ? "0%" : "0%",
           bottom: isMobile ? "0%" : "0%",
           transform: "translateX(-50%)",
-          width: isMobile ? "80vw" : "30vw",
-          maxWidth: "340px",
+          width: isMobile ? "150vw" : "30vw",
           filter: "drop-shadow(0 0 50px rgba(247,165,77,0.3))",
         }}
       />
 
       {/* 📜 Konten Box Naskah */}
-      <div className="relative z-30 flex items-end justify-center h-full px-4 md:items-center pb-[50%] md:pb-0">
+      <div className="relative z-30 flex items-end justify-center h-full px-4 md:items-center pb-[80%] md:pb-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
