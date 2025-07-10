@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-
-import { missions } from "../data/mission";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { missions } from "../data/mission";
 import { motion } from "framer-motion";
 
 const DashboardPage = () => {
@@ -12,16 +11,36 @@ const DashboardPage = () => {
     localStorage.setItem(`score_m${id}`, 0);
     navigate(`/puzzle/${id}`);
   };
+
+  // Detect click luar popup
   useEffect(() => {
     const closePopup = () => setShowInfoId(null);
     window.addEventListener("click", closePopup);
     return () => window.removeEventListener("click", closePopup);
   }, []);
 
-  const radius = 200;
+  // Ref & ukuran container
+  const containerRef = useRef(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const updateSize = () => {
+      const w = containerRef.current?.offsetWidth || 0;
+      const h = containerRef.current?.offsetHeight || 0;
+      setSize({ width: w, height: h });
+      setIsMobile(window.innerWidth < 768);
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const relativeRadius = isMobile ? 0.4 : 0.42;
+  const buttonRatio = isMobile ? 0.18 : 0.2; // Ukuran tombol proporsional
 
   return (
-    <div className="relative h-[100svh] bg-[#0d0f1a] overflow-hidden flex items-center justify-center">
+    <div className="relative h-[100svh] bg-[#0d0f1a] overflow-hidden flex items-center justify-center font-[Cinzel]">
       {/* 🌌 Background */}
       <div className="absolute inset-0 z-0">
         <img
@@ -35,61 +54,64 @@ const DashboardPage = () => {
 
       {/* ✨ Lingkaran Portal Aura */}
       <motion.div
-        className="absolute z-0 w-[400px] h-[400px] rounded-full border border-[rgba(245,226,198,1)]"
-        transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
+        className="absolute z-0 rounded-full border border-[rgba(245,226,198,1)]"
         style={{
-          boxShadow:
-            "0 0 20px rgba(247,165,77,0.5), 0 0 2000px rgba(247,165,77,0.3)",
+          width: size.width * 0.8,
+          height: size.height * 0.8,
+          boxShadow: "0 0 20px rgba(247,165,77,0.5), 0 0 2000px rgba(247,165,77,0.3)",
         }}
+        transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
       />
 
       {/* 🧲 Tombol Misi Keliling */}
-      <div className="relative z-10 w-[360px] h-[360px] md:w-[480px] md:h-[480px]">
+      <div
+        ref={containerRef}
+        className="relative z-10 w-[360px] h-[360px] md:w-[480px] md:h-[480px]"
+      >
         {missions.map((mission, i) => {
-          const angle = (360 / missions.length) * i;
-          const x = radius * Math.cos((angle * Math.PI) / 180);
-          const y = radius * Math.sin((angle * Math.PI) / 180);
+          const angle = (2 * Math.PI * i) / missions.length;
+          const base = Math.min(size.width, size.height) * relativeRadius;
+          const x = base * Math.cos(angle);
+          const y = base * Math.sin(angle);
+          const btnSize = Math.min(size.width, size.height) * buttonRatio;
 
           return (
             <div
               key={mission.id}
               className="absolute flex flex-col items-center"
               style={{
-                left: `calc(50% + ${x}px - 50px)`,
-                top: `calc(50% + ${y}px - 50px)`,
+                left: `calc(50% + ${x}px - ${btnSize / 2}px)`,
+                top: `calc(50% + ${y}px - ${btnSize / 2}px)`,
+                width: btnSize,
               }}
             >
               {/* Tombol Misi */}
               <motion.button
                 onClick={() => handleClickMission(mission.id)}
-                className="w-[100px] h-[100px] rounded-full border-[1px]  border-[rgba(245,226,198,1)] shadow-lg overflow-hidden bg-black/30 backdrop-blur-md transition-all relative"
+                className="aspect-square rounded-full border border-[rgba(245,226,198,1)] shadow-lg overflow-hidden bg-black/30 backdrop-blur-md relative"
                 style={{
-                  scale: 1,
-                  boxShadow:
-                    "0 0 20px rgba(247,165,77, 0.6), 0 0 40px rgba(251, 191, 36, 0.4)",
+                  width: btnSize,
+                  height: btnSize,
+                  boxShadow: "0 0 20px rgba(247,165,77, 0.6), 0 0 40px rgba(251, 191, 36, 0.4)",
                 }}
                 whileHover={{
                   scale: 0.9,
-                  boxShadow:
-                    "0 0 20px rgba(0, 0, 0, 0.6), 0 0 40px rgba(5, 0, 0, 0.4)",
+                  boxShadow: "0 0 20px rgba(0, 0, 0, 0.6), 0 0 40px rgba(5, 0, 0, 0.4)",
                 }}
                 animate={{
-                  rotate: [-3, 3, -3], // goyang kanan-kiri
+                  rotate: [-3, 3, -3],
                 }}
                 transition={{
-                  duration: 1, // setiap tombol beda timing dikit
+                  duration: 1,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
               >
-                {/* Gambar bulat */}
                 <img
                   src={`/img/m${mission.id}.jpg`}
                   alt={`Misi ${mission.id}`}
                   className="object-cover w-full h-full"
                 />
-
-                {/* Label di atas */}
                 <div className="absolute inset-0 flex items-start justify-center pt-2">
                   <span className="text-xs font-bold text-yellow-200 drop-shadow-sm bg-black/40 px-2 py-0.5 rounded-full">
                     Misi {mission.id}
@@ -118,9 +140,7 @@ const DashboardPage = () => {
                   className="absolute z-20 p-3 mt-2 text-xs text-yellow-100 border border-yellow-700 rounded shadow-lg top-full w-44 bg-black/80 backdrop-blur-md"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <p className="mb-1 font-bold text-amber-400">
-                    {mission.title}
-                  </p>
+                  <p className="mb-1 font-bold text-amber-400">{mission.title}</p>
                   <p className="leading-snug">{mission.info}</p>
                 </motion.div>
               )}
@@ -130,20 +150,22 @@ const DashboardPage = () => {
 
         {/* 🌀 Pusat Portal */}
         <motion.div
-          className="absolute left-[35%] top-[35%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full border border-[rgba(247,165,77, 0.6)] bg-black/40 text-amber-300 font-bold text-sm md:text-base flex items-center justify-center text-center animate-pulse shadow-[0_0_25px_rgba(251,191,36,0.4)] backdrop-blur-sm"
+          className="absolute left-[35%] top-[35%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(247,165,77, 0.6)] bg-black/40 text-amber-300 font-bold text-center animate-pulse shadow-[0_0_25px_rgba(251,191,36,0.4)] backdrop-blur-sm flex items-center justify-center"
+          style={{
+            width: size.width * 0.3,
+            height: size.height * 0.3,
+            fontSize: size.width < 400 ? "0.75rem" : "1rem",
+            fontFamily: "Cinzel, serif",
+            textShadow: "0 0 20px rgba(247,165,77, 0.6), 0 0 40px rgba(251, 191, 36, 0.4)",
+          }}
           animate={{ scale: [1, 1.03, 1] }}
           transition={{
             repeat: Infinity,
             duration: 2,
             ease: "easeInOut",
           }}
-          style={{
-            fontFamily: "Cinzel, serif",
-            textShadow:
-              "0 0 20px rgba(247,165,77, 0.6), 0 0 40px rgba(251, 191, 36, 0.4)",
-          }}
         >
-           PILIH MISI
+          PILIH MISI
         </motion.div>
       </div>
     </div>
