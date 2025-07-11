@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { missions } from "../data/mission";
 import { motion } from "framer-motion";
+import { TimerContext } from "../contexts/TimerContext";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+const { resetTimer } = useContext(TimerContext);
   const [showInfoId, setShowInfoId] = useState(null);
 
-  const handleClickMission = (id) => {
-    localStorage.setItem(`score_m${id}`, 0);
-    navigate(`/puzzle/${id}`);
-  };
+const handleClickMission = (id) => {
+  localStorage.setItem(`score_m${id}`, 0);
+  resetTimer(); // ⏱ reset waktu ketika mulai misi baru
+  navigate(`/puzzle/${id}`);
+};
+
 
   // Detect click luar popup
   useEffect(() => {

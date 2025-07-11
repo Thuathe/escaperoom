@@ -16,13 +16,14 @@ const ResultPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    stopTimer();
+    stopTimer(); // ⛔ Stop timer saat halaman ini diakses
   }, [stopTimer]);
 
   const formatTime = (seconds) => {
+    if (!seconds || isNaN(seconds)) return "0:00";
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
-    return `${m}m ${s}s`;
+    return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
   if (!mission) {
@@ -34,36 +35,62 @@ const ResultPage = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#0d0f1a] overflow-hidden flex items-center justify-center px-4">
-      {/* Background */}
+    <div className="relative min-h-screen bg-[#0d0f1a] overflow-hidden flex items-center justify-center px-4 font-[Cinzel]">
+      {/* 🌌 Background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/img/bg.jpg"
-          alt="castle"
-          className="object-cover w-full h-full opacity-20"
+          src="/img/bg_result.jpg"
+          alt="background"
+          className="object-cover w-full h-full opacity-30"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#ffb84d22] to-[#0d0f1a] z-0" />
-      <div className="absolute inset-0 bg-[url('/img/fog.jpg')] bg-cover opacity-10 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#ffb84d33] to-[#0d0f1a] z-0" />
+      <div className="absolute inset-0 bg-[url('/img/fog.png')] bg-cover opacity-10 z-0" />
 
-      {/* Konten */}
-      <div className="relative z-10 bg-white/5 backdrop-blur-md border border-yellow-900 rounded-2xl shadow-xl p-8 w-full max-w-md text-white text-center">
-        <h2 className="text-3xl font-bold text-amber-400 drop-shadow mb-4">🧩 Hasil Misi {missionId}</h2>
-        <p className="mb-2 text-yellow-100">
-          Nama Agen: <span className="font-semibold text-white">{name}</span>
-        </p>
-        <p className="mb-2 text-yellow-100">
-          Kelas: <span className="font-semibold text-white">{kelas}</span>
-        </p>
-        <p className="mb-2 text-lg text-yellow-100">
-          Skor: <span className="font-semibold text-amber-300">{score} / {mission.questions.length}</span>
-        </p>
-        <p className="mb-6 text-yellow-100">
-          Waktu Penyelesaian: <span className="text-white font-semibold">{formatTime(elapsed)}</span>
-        </p>
+      {/* 📜 Sertifikat / Hasil */}
+      <div
+        className="relative z-10 bg-white/5 backdrop-blur-md border border-yellow-900 rounded-2xl shadow-[0_0_80px_rgba(247,165,77,0.15)] px-6 py-8 w-full max-w-md text-center text-yellow-100"
+        style={{
+          backgroundImage: "url('/img/parchment.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <h2
+          className="text-2xl font-extrabold mb-6 tracking-wider uppercase"
+          style={{
+            color: "#f5e6c6",
+            textShadow:
+              "0 0 15px rgba(255,215,140,0.4), 0 0 35px rgba(255,165,0,0.2)",
+          }}
+        >
+          🧩 Hasil Misi {missionId}
+        </h2>
+
+        <div className="space-y-3 text-sm md:text-base">
+          <p>
+            Agen Terdaftar: <br />
+            <span className="text-lg text-white font-bold">{name}</span>
+          </p>
+          <p>
+            Kelas Rahasia: <br />
+            <span className="text-white">{kelas}</span>
+          </p>
+          <p>
+            Skor Keberhasilan: <br />
+            <span className="text-amber-300 text-lg font-bold">
+              {score} / {mission.questions.length}
+            </span>
+          </p>
+          <p>
+            Waktu Penyelesaian: <br />
+            <span className="text-white font-semibold">{formatTime(elapsed)}</span>
+          </p>
+        </div>
+
         <button
           onClick={() => navigate("/dashboard")}
-          className="mt-4 bg-amber-500 hover:bg-amber-600 text-black font-semibold px-6 py-2 rounded shadow-lg transition"
+          className="mt-8 px-6 py-2 text-sm font-bold text-black bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all"
         >
           🔙 Kembali ke Peta Labirin
         </button>
